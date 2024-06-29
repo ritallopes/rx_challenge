@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "backend"
+name = "app"
 version = "0.1.0"
 description = ""
 authors = ["Rita Lopes <rita_lino@outlook.com>"]
@@ -11,7 +11,9 @@ fastapi = "^0.111.0"
 uvicorn = "^0.30.1"
 websockets = "^12.0"
 pytest = "^8.2.2"
-
+sqlalchemy = "^1.4.22"
+pydantic = "^1.8.2"
+psycopg2-binary = "^2.9.9"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.2.2"
@@ -27,14 +29,14 @@ addopts = '-p no:warnings'
 [tool.taskipy.tasks]
 lint = 'ruff check . && ruff check . --diff'
 format = 'ruff check . --fix && ruff format .'
-run = 'fastapi dev backend/app.py'
+run = 'fastapi dev app/main.py'
 lint_test = 'task lint'
-test = 'pytest -s -x --cov=backend -vv'
+test = 'pytest -s -x --cov=backend/app -vv'
 cov_test = 'coverage html'
 
 [tool.ruff]
-line-length = 70
-extend-exclude = ['migrations']
+line-length = 89
+extend-exclude = ['migrations','alembic/versions' ,'venv', 'build', 'dist', 'htmlcov']
 
 [tool.ruff.lint]
 preview = true
@@ -46,4 +48,4 @@ quote-style = 'single'
 
 [build-system]
 requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+build-app = "poetry.core.masonry.api"
