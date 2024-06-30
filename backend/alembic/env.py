@@ -8,12 +8,20 @@ from alembic import context
 from app.api.db.models import Base
 
 dotenv.load_dotenv()
-print(f"Using database URL: {os.getenv('PGDATABASEURL')}")
+PGPASSWORD = os.getenv('PGPASSWORD')
+if not PGPASSWORD:
+    raise ValueError(
+        'Uma ou mais variáveis de ambiente necessárias não estão definidas.'
+    )
+
+DATABASE_URL = f'postgresql://neondb_owner:{PGPASSWORD}@ep-lively-surf-a57l4i04.us-east-2.aws.neon.tech/neondb?sslmode=require'
+
+print(f"Using database URL: {DATABASE_URL}")
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.set_main_option('sqlalchemy.url', os.getenv('PGDATABASEURL', ''))
+config.set_main_option('sqlalchemy.url', DATABASE_URL)
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
