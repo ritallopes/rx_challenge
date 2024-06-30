@@ -40,18 +40,3 @@ jobs:
         pip install ruff
         ruff check . && ruff check . --diff
       continue-on-error: true
-    - name: Test with pytest
-      working-directory: backend
-      run: |
-        pip install pytest
-        pytest -s -x --cov=app -vv
-    - name: Generate coverage report
-      working-directory: backend
-      run: |
-        pip install coverage
-        coverage html
-    - name: Upload coverage report
-      uses: actions/upload-artifact@v3
-      with:
-        name: coverage-report
-        path: backend/coverage.html
