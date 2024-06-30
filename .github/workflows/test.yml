@@ -1,0 +1,57 @@
+name: Test Challenge
+
+on:
+  push:
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v4
+      name: Checkout code
+    - name: Set up Python 3.12
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install dependencies
+      working-directory: backend
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    
+    - name: Set up Database URL
+      env:
+        PG_USER: neondb_owner
+        PG_HOST: ep-lively-surf-a57l4i04.us-east-2.aws.neon.tech
+        PG_PORT: 5432
+        PG_DATABASE: neondb
+        PG_PASSWORD: ${{ secrets.PGPASSWORD }}
+      run: |
+        export PGDATABASEURL=postgres://$PG_USER:$PGPASSWORD@$PG_HOST:$PG_PORT/$PG_DATABASE
+        echo "PGDATABASEURL=$PGDATABASEURL"
+
+    - name: Lint with Ruff
+      working-directory: backend
+      run: |
+        pip install ruff
+        ruff check . && ruff check . --diff
+      continue-on-error: true
+    - name: Test with pytest
+      working-directory: backend
+      run: |
+        pip install pytest
+        pytest -s -x --cov=app -vv
+    - name: Generate coverage report
+      working-directory: backend
+      run: |
+        pip install coverage
+        coverage html
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: backend/coverage.html
