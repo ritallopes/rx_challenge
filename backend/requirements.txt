@@ -1,6 +1,5 @@
 annotated-types==0.7.0
 anyio==4.4.0
--e git+https://github.com/ritallopes/rx_challenge@def92f085d799a97e93c5094b987c73ac57148ae#egg=app&subdirectory=backend
 certifi==2024.6.2
 click==8.1.7
 colorama==0.4.6
