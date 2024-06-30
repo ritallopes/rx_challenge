@@ -40,3 +40,9 @@ jobs:
         pip install ruff
         ruff check . && ruff check . --diff
       continue-on-error: true
+    - name: Test with Pyenv
+      working-directory: backend
+      run: |
+        pip install pytest
+        pytest -s -x --cov=app -vv
+      continue-on-error: true
