@@ -1,4 +1,3 @@
-from datetime import datetime
 from http import HTTPStatus
 
 
@@ -13,24 +12,25 @@ def test_read_users(client):
     assert response.status_code == HTTPStatus.OK
 
 
+CREATED_EMAIL = 'user@example.com'
+
+
 def test_create_user(client):
     response = client.post(
         '/users/',
         json={
             'name': 'user',
-            'email': 'user@example.com',
+            'email': CREATED_EMAIL,
             'password': 'password',
         },
     )
     assert response.status_code == HTTPStatus.CREATED
-    assert response.json() == {'name': 'user', 'email': 'user@example.com'}
-    global created_user_email
-    created_user_email = response.json().get('email')
+    assert response.json() == {'name': 'user', 'email': CREATED_EMAIL}
 
 
 def test_delete_user(client):
-    assert created_user_email is not None
-    response = client.delete(f'/users/{created_user_email}/')
+    assert CREATED_EMAIL is not None
+    response = client.delete(f'/users/{CREATED_EMAIL}/')
     assert response.status_code == HTTPStatus.NO_CONTENT
-    response = client.get(f'/users/{created_user_email}/')
+    response = client.get(f'/users/{CREATED_EMAIL}/')
     assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED

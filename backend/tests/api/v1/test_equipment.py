@@ -1,6 +1,7 @@
 from datetime import datetime
 from http import HTTPStatus
 
+
 def test_read_equipment(client):
     equipment_id = 'EQ-001'
     response = client.get(f'/equipments/{equipment_id}')

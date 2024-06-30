@@ -1,5 +1,6 @@
 from pydantic import BaseSettings
 
+
 class Settings(BaseSettings):
     PGHOST: str
     PGDATABASE: str
@@ -8,8 +9,8 @@ class Settings(BaseSettings):
     PGPORT: int
     PGDATABASEURL: str
 
-
     class Config:
-        env_file = ".env"
+        env_file = '.env'
+
 
 settings = Settings()
