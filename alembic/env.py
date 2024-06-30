@@ -5,10 +5,12 @@ import dotenv
 from sqlalchemy import engine_from_config, pool
 
 from alembic import context
-from app.api.db.models import Base
 
+SQLALCHEMY_DATABASE_URL = os.getenv('PGDATABASEURL')
 dotenv.load_dotenv()
-print(f"Using database URL: {os.getenv('PGDATABASEURL')}")
+# Continue com a configuração do Alembic...
+
+print(f"Using database URL: {SQLALCHEMY_DATABASE_URL}")
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
