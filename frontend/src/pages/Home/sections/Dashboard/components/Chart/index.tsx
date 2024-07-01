@@ -1,14 +1,9 @@
 import { useTheme } from '@mui/material/styles'
 import { LineChart, axisClasses } from '@mui/x-charts'
 import { ChartsTextStyle } from '@mui/x-charts/ChartsText'
-import Title from '../Title'
-import { IEquipmentData } from '../../models/equipament'
-import { useEquipment } from '../../context/EquipmentContext'
-
-interface DataPoint {
-  time: string
-  amount: number | null
-}
+import { useEquipment } from '../../../../../../context/EquipmentContext'
+import { IEquipmentData } from '../../../../../../models/equipament'
+import Title from '../../../../../../components/Title'
 
 const Chart = () => {
   const theme = useTheme()
@@ -24,8 +19,7 @@ const Chart = () => {
 
   return (
     <>
-      <Title>Dados ao Longo do Tempo</Title>
-      {}
+      <Title>Data Over Time</Title>
       <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden' }}>
         <LineChart
           dataset={formattedData}

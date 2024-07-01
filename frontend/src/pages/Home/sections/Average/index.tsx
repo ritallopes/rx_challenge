@@ -1,30 +1,28 @@
 import {
   Typography,
-  Link,
   Grid,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
-  Container,
   CircularProgress,
   Paper,
 } from '@mui/material'
-import Title from '../../../../components/Title'
 import { AdsClickOutlined } from '@mui/icons-material'
 import { useState } from 'react'
 import { useEquipment } from '../../../../context/EquipmentContext'
-import { IEquipment } from '../../../../models/equipament'
 import { timeHandler } from '../../../../utils/date'
+import Title from '../../../../components/Title'
+import { IEquipment } from '../../../../models/equipament'
 
 type IOptionValue = 'oneDay' | 'twoDays' | 'oneWeek' | 'oneMonth'
 
 const OPTIONS: Array<{ label: string; value: IOptionValue }> = [
-  { label: '24 horas', value: 'oneDay' },
-  { label: '48 horas', value: 'twoDays' },
-  { label: '1 semana', value: 'oneWeek' },
-  { label: '1 mês', value: 'oneMonth' },
+  { label: '24 Hours', value: 'oneDay' },
+  { label: '48 Hours', value: 'twoDays' },
+  { label: '1 Week', value: 'oneWeek' },
+  { label: '1 Month', value: 'oneMonth' },
 ]
 
 const Average = () => {
@@ -38,7 +36,6 @@ const Average = () => {
     fetchStatistics,
     equipamentList,
     startTime,
-    endTime,
   } = useEquipment()
   const [selectedTime, setSelectedTime] = useState<IOptionValue>('oneDay')
 
@@ -96,7 +93,7 @@ const Average = () => {
         <Grid item xs={4}>
           <Title>
             <AdsClickOutlined />
-            Medidas recentes{` `}
+            Recent Measures{` `}
             {(isLoadingStat || !Array.isArray(equipamentList)) && (
               <CircularProgress color="secondary" />
             )}
@@ -105,12 +102,12 @@ const Average = () => {
         <Grid item xs={4}>
           {Array.isArray(equipamentList) && (
             <FormControl fullWidth>
-              <InputLabel id="select-measurements">Média do sensor</InputLabel>
+              <InputLabel id="select-measurements">Equipment</InputLabel>
               <Select
                 labelId="select-measurements"
                 id="select-measurements"
                 value={equipmentId}
-                label="Equipamento"
+                label="Equipment"
                 onChange={handleChangeEquipment}
               >
                 {equipamentList.map((option: IEquipment) => (
@@ -127,12 +124,12 @@ const Average = () => {
         </Grid>
         <Grid item xs={4}>
           <FormControl fullWidth>
-            <InputLabel id="select-measurements">Média do sensor</InputLabel>
+            <InputLabel id="select-measurements">Sensor Average Value</InputLabel>
             <Select
               labelId="select-measurements"
               id="select-measurements"
               value={selectedTime}
-              label="Média do sensor"
+              label="Sensor Average Value"
               onChange={handleChange}
               disabled={isLoadingStat}
             >

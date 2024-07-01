@@ -3,7 +3,6 @@ import {
   useState,
   ReactNode,
   useContext,
-  useEffect,
 } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import { IEquipment, IEquipmentData, IStatistics } from '../models/equipament'
@@ -91,10 +90,6 @@ export const EquipmentProvider = ({ children }: { children: ReactNode }) => {
     refetch()
     refetchList()
   }
-  useEffect(() => {
-    console.log(equipmentDataList)
-    console.log(statisticsData)
-  }, [])
 
   return (
     <EquipmentContext.Provider

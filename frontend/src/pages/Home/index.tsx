@@ -1,4 +1,4 @@
-import { Container, Grid, Paper } from '@mui/material'
+import { Container} from '@mui/material'
 import Sidebar from '../../components/Sidebar'
 import Average from './sections/Average'
 import Dashboard from './sections/Dashboard'

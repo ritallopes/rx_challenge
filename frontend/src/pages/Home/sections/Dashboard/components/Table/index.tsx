@@ -1,4 +1,3 @@
-import * as React from 'react'
 import Table from '@mui/material/Table'
 import TableBody from '@mui/material/TableBody'
 import TableCell from '@mui/material/TableCell'
@@ -17,9 +16,9 @@ interface HeadCell {
 }
 
 const headCells: HeadCell[] = [
-  { id: 'equipment_id', numeric: false, label: 'Id do equipamento' },
-  { id: 'timestamp', numeric: false, label: 'Data' },
-  { id: 'value', numeric: true, label: 'Valor' },
+  { id: 'equipment_id', numeric: false, label: 'Equipment ID' },
+  { id: 'timestamp', numeric: false, label: 'Date' },
+  { id: 'value', numeric: true, label: 'Value' },
 ]
 
 const descendingComparator = <T,>(a: T, b: T, orderBy: keyof T) => {
@@ -62,7 +61,6 @@ const TableData = () => {
   const [order, setOrder] = useState<Order>('asc')
   const [orderBy, setOrderBy] = useState<keyof IEquipmentData>('equipment_id')
 
-
   const handleRequestSort = (property: keyof IEquipmentData) => {
     const isAsc = orderBy === property && order === 'asc'
     setOrder(isAsc ? 'desc' : 'asc')
@@ -70,14 +68,13 @@ const TableData = () => {
   }
 
   const createSortHandler =
-    (property: keyof IEquipmentData) => (event: React.MouseEvent<unknown>) => {
-      console.log(event)
+    (property: keyof IEquipmentData) => () => {
       handleRequestSort(property)
     }
 
   return (
     <>
-      <Title>Dados do equipamento</Title>
+      <Title>Equipment Data</Title>
       <Table size="small">
         <TableHead>
           <TableRow>
