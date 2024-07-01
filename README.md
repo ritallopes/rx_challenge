@@ -115,5 +115,3 @@ yarn <script_name>
 
 [LinkedIn](https://www.linkedin.com/in/ritallopes/)
 ```
-
-Certifique-se de substituir o `#` no link para a documentação no Notion pelo URL correto da sua página do Notion.
