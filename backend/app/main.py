@@ -26,17 +26,14 @@ from app.api.v1.schemas import (
 
 app = FastAPI()
 
-origins = [
-    'http://localhost',
-    'http://localhost:5173',
-]
+origins = ['*']
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=['*'],
+    allow_origins=origins,  # Substitua pelo domínio onde seu frontend está rodando
     allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
+    allow_methods=["*"],  # Permite todos os métodos HTTP
+    allow_headers=["*"],  # Permite todos os cabeçalhos
 )
 
 app = FastAPI()
