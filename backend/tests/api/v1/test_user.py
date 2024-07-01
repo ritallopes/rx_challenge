@@ -28,9 +28,11 @@ def test_create_user(client):
     assert response.json() == {'name': 'user', 'email': CREATED_EMAIL}
 
 
-def test_delete_user(client):
+def test_delete_user(client, user, token):
     assert CREATED_EMAIL is not None
-    response = client.delete(f'/users/{CREATED_EMAIL}/')
-    assert response.status_code == HTTPStatus.NO_CONTENT
-    response = client.get(f'/users/{CREATED_EMAIL}/')
-    assert response.status_code == HTTPStatus.METHOD_NOT_ALLOWED
+    response = client.delete(
+        f'/users/{CREATED_EMAIL}',
+        headers={'Authorization': f'Bearer {token}'},
+    )
+    assert response.status_code == HTTPStatus.OK
+    assert response.json() == {'message': 'User deleted'}

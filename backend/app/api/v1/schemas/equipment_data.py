@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional
+from typing import Dict, List, Optional
 
 from pydantic import BaseModel, Field
 
@@ -66,3 +66,8 @@ class EquipmentDataStatisticsResponse(BaseModel):
         json_schema_extra = {
             'example': {'sum_value': 300.0, 'average_value': 75.0, 'median_value': 78.0}
         }
+
+
+class CSVUploadResponse(BaseModel):
+    message: str
+    invalid_rows: List[Dict[str, str]]

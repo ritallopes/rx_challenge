@@ -6,6 +6,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+.vite/*
+
 
 node_modules
 dist
@@ -81,6 +83,7 @@ frontend/node_modules
 frontend/distðð
 *node_modules/
 node_modules/
+node_modules/*
 
 # Translations
 *.mo

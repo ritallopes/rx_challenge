@@ -16,7 +16,7 @@ if not PGPASSWORD:
 
 DATABASE_URL = f'postgresql://neondb_owner:{PGPASSWORD}@ep-lively-surf-a57l4i04.us-east-2.aws.neon.tech/neondb?sslmode=require'
 
-print(f"Using database URL: {DATABASE_URL}")
+print(f'Using database URL: {DATABASE_URL}')
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
