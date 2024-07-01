@@ -1,30 +1,25 @@
-import { createContext, useState, useContext, ReactNode, useEffect } from 'react';
-import { ThemeProvider as ThemeProviderMUI, CssBaseline } from '@mui/material';
-import { darkTheme, lightTheme } from './theme';
+import { createContext, useState, useContext, ReactNode } from 'react'
+import { ThemeProvider as ThemeProviderMUI, CssBaseline } from '@mui/material'
+import { darkTheme, lightTheme } from './theme'
 
 interface IThemeData {
-  lightMode: boolean;
-  toggleTheme: () => void;
+  lightMode: boolean
+  toggleTheme: () => void
 }
 
 export const ThemeContext = createContext<IThemeData>({
   lightMode: true,
   toggleTheme: () => {},
-});
+})
 
-export const useTheme = () => useContext(ThemeContext);
+export const useTheme = () => useContext(ThemeContext)
 
 const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  const [lightMode, setLightMode] = useState(false);
+  const [lightMode, setLightMode] = useState(true)
 
-
-  useEffect(() => {
-    console.log(lightMode)
-  },[])
   const toggleTheme = () => {
-    console.log(lightMode)
-    setLightMode((prevState) => !prevState);
-  };
+    setLightMode((prevState) => !prevState)
+  }
 
   return (
     <ThemeContext.Provider value={{ lightMode, toggleTheme }}>
@@ -33,7 +28,7 @@ const ThemeProvider = ({ children }: { children: ReactNode }) => {
         {children}
       </ThemeProviderMUI>
     </ThemeContext.Provider>
-  );
-};
+  )
+}
 
-export default ThemeProvider;
+export default ThemeProvider

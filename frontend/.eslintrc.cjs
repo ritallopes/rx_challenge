@@ -11,7 +11,7 @@ module.exports = {
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
   settings: { react: { version: '18.2' } },
-  plugins: ['react-refresh', 'import'],
+  plugins: ['react-refresh', 'import', 'prettier'],
   rules: {
     'prettier/prettier': ['error', { semi: false }], 
     'react-refresh/only-export-components': [

@@ -1,38 +1,34 @@
-import * as React from 'react'
 import { useTheme } from '@mui/material/styles'
 import { LineChart, axisClasses } from '@mui/x-charts'
 import { ChartsTextStyle } from '@mui/x-charts/ChartsText'
 import Title from '../Title'
+import { IEquipmentData } from '../../models/equipament'
+import { useEquipment } from '../../context/EquipmentContext'
 
-// Generate Sales Data
-function createData(
-  time: string,
-  amount?: number,
-): { time: string; amount: number | null } {
-  return { time, amount: amount ?? null }
+interface DataPoint {
+  time: string
+  amount: number | null
 }
 
-const data = [
-  createData('00:00', 0),
-  createData('03:00', 300),
-  createData('06:00', 600),
-  createData('09:00', 800),
-  createData('12:00', 1500),
-  createData('15:00', 2000),
-  createData('18:00', 2400),
-  createData('21:00', 2400),
-  createData('24:00'),
-]
-
-export default function Chart() {
+const Chart = () => {
   const theme = useTheme()
+  const { equipmentDataList } = useEquipment() || []
+
+  const formattedData = equipmentDataList.map((item: IEquipmentData) => ({
+    time: new Date(item.timestamp).toLocaleTimeString('pt-BR', {
+      hour: '2-digit',
+      minute: '2-digit',
+    }),
+    amount: item.value,
+  }))
 
   return (
-    <React.Fragment>
-      <Title>Today</Title>
+    <>
+      <Title>Dados ao Longo do Tempo</Title>
+      {}
       <div style={{ width: '100%', flexGrow: 1, overflow: 'hidden' }}>
         <LineChart
-          dataset={data}
+          dataset={formattedData}
           margin={{
             top: 16,
             right: 20,
@@ -43,27 +39,26 @@ export default function Chart() {
             {
               scaleType: 'point',
               dataKey: 'time',
-              tickNumber: 2,
+              tickNumber: 5,
               tickLabelStyle: theme.typography.body2 as ChartsTextStyle,
             },
           ]}
           yAxis={[
             {
-              label: 'Sales ($)',
+              label: 'Valor',
               labelStyle: {
                 ...(theme.typography.body1 as ChartsTextStyle),
                 fill: theme.palette.text.primary,
               },
               tickLabelStyle: theme.typography.body2 as ChartsTextStyle,
-              max: 2500,
-              tickNumber: 3,
+              tickNumber: 4,
             },
           ]}
           series={[
             {
               dataKey: 'amount',
-              showMark: false,
-              color: theme.palette.primary.light,
+              showMark: true,
+              color: theme.palette.primary.main,
             },
           ]}
           sx={{
@@ -79,6 +74,8 @@ export default function Chart() {
           }}
         />
       </div>
-    </React.Fragment>
+    </>
   )
 }
+
+export default Chart

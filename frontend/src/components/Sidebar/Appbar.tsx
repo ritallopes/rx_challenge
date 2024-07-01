@@ -2,11 +2,11 @@ import { Notifications } from '@mui/icons-material'
 import { Toolbar, IconButton, Typography, Badge } from '@mui/material'
 import MuiAppBar, { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar'
 import { styled } from '@mui/material/styles'
-import { useState } from 'react'
 
 interface AppBarProps extends MuiAppBarProps {
   open?: boolean
 }
+
 export const DRAWER_WIDTH: number = 240
 
 const AppBarStyled = styled(MuiAppBar, {
@@ -27,50 +27,42 @@ const AppBarStyled = styled(MuiAppBar, {
   }),
 }))
 
-
-const CustomAppBar = () => {
-  const [open, setOpen] = useState(true);
-  const toggleDrawer = () => {
-    setOpen(!open);
-  };
-
+const CustomAppBar = ({
+  open,
+  toggleDrawer,
+}: {
+  open: boolean
+  toggleDrawer: () => void
+}) => {
   return (
-    <>
-      <AppBarStyled position="absolute">
-        <Toolbar
+    <AppBarStyled position="absolute" open={open}>
+      <Toolbar
+        sx={{
+          pr: '24px',
+        }}
+      >
+        <IconButton
+          edge="start"
+          aria-label="open drawer"
+          onClick={toggleDrawer}
           sx={{
-            pr: '24px', // keep right padding when drawer closed
+            marginRight: '36px',
+            ...(open && { display: 'none' }),
           }}
         >
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            sx={{
-              marginRight: '36px',
-             ...(open && { display: 'none' }), // This hides the IconButton when the drawer is open
-            }}
-          >
-            {/* Your menu icon here */}
-          </IconButton>
-          <Typography
-            component="h1"
-            variant="h6"
-            color="inherit"
-            noWrap
-            sx={{ flexGrow: 1 }}
-          >
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <Notifications />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBarStyled>
-    </>
-  );
-};
+          {/* Adicione o ícone aqui se necessário */}
+        </IconButton>
+        <Typography component="h1" variant="h6" noWrap sx={{ flexGrow: 1 }}>
+          Dashboard
+        </Typography>
+        <IconButton color="inherit">
+          <Badge badgeContent={4} color="secondary">
+            <Notifications />
+          </Badge>
+        </IconButton>
+      </Toolbar>
+    </AppBarStyled>
+  )
+}
+
 export default CustomAppBar

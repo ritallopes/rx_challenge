@@ -5,10 +5,10 @@ import Container from '@mui/material/Container'
 import Grid from '@mui/material/Grid'
 import Paper from '@mui/material/Paper'
 import Link from '@mui/material/Link'
+
 import Chart from '../../../../components/Chart'
-import Orders from '../../../../components/Orders'
-import Deposits from '../../../../components/Deposits'
-import Sidebar from '../../../../components/Sidebar'
+import TableData from './components/Table'
+import { Computer } from '@mui/icons-material'
 
 function Copyright(props: any) {
   return (
@@ -18,72 +18,36 @@ function Copyright(props: any) {
       align="center"
       {...props}
     >
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Computer className="m-2" />
+      <Link color="inherit" href="https://www.linkedin.com/in/ritallopes/">
+        Rita Lopes
       </Link>{' '}
       {new Date().getFullYear()}
-      {'.'}
     </Typography>
   )
 }
 
 export default function Dashboard() {
-
   return (
-      <Box sx={{ display: 'flex' }}>
-<Sidebar />        
-        <Box
-          component="main"
+    <Grid container spacing={3} marginTop={3}>
+      <Grid item xs={12}>
+        <Paper
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
-            flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
+            p: 2,
+            display: 'flex',
+            flexDirection: 'column',
+            height: 240,
           }}
         >
-          <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-            <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Chart />
-                </Paper>
-              </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                  <Deposits />
-                </Paper>
-              </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
-                <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  <Orders />
-                </Paper>
-              </Grid>
-            </Grid>
-            <Copyright sx={{ pt: 4 }} />
-          </Container>
-        </Box>
-      </Box>
+          <Chart />
+        </Paper>
+      </Grid>
+
+      <Grid item xs={12}>
+        <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
+          <TableData />
+        </Paper>
+      </Grid>
+    </Grid>
   )
 }

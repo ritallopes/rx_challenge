@@ -113,7 +113,7 @@ let darkTheme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Poppins",
+    fontFamily: 'Poppins',
     h1: {
       fontSize: '2rem',
       '@media (min-width:600px)': {
@@ -189,8 +189,7 @@ let darkTheme = createTheme({
   },
 })
 
-
-lightTheme = responsiveFontSizes(lightTheme);
-darkTheme = responsiveFontSizes(darkTheme);
+lightTheme = responsiveFontSizes(lightTheme)
+darkTheme = responsiveFontSizes(darkTheme)
 
 export { lightTheme, darkTheme }

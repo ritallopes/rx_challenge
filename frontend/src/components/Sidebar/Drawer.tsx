@@ -28,5 +28,4 @@ const Drawer = styled(MuiDrawer, {
   },
 }))
 
-
 export default Drawer
